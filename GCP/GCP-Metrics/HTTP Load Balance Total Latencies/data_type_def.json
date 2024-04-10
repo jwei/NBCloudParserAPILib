@@ -1,0 +1,52 @@
+// tech_spec.json
+// GCP Metric - LB Total Letency
+
+// Solution 1 - special key for time:
+
+{
+    "name": "GCP LB Latency",    
+    "apiParserScriptCategoryId": "37a21905-2c29-4b8e-a520-2fab107ee5db",
+    "documentId": "6bcf2f20-9d59-4fef-b4d3-cb3b6014ed67",
+    "apiDef": {
+        "parserInputVar": [
+            // { "name": "$intf_name" },
+            // { "name": "$start_time" },  // support a fixed time-window, e.g. Last Mon. -> Last Wed.
+            // { "name": "$end_time" }
+        ],
+        "buildParameters": [{
+            "GetDeviceProperties": true,
+            "GetInterfaceProperties": false,
+            "techName": "Google Cloud Platform",
+            "params": "*"
+        }],
+        "retrieveData": {
+            "extraParam" : {  // processed by C#
+                "START_TIME" : {
+                    "unit": "hours", // min/hour/day
+                    "value": 200  // compared with datetime.now()
+                },
+                "END_TIME": {
+                    "unit": "day", // min/hour/day
+                    "value": 3  // compared with datetime.now()
+                },
+                "FILTER_METRIC_TYPE_PREFIX": "loadbalancing.googleapis.com/",            
+                "FILTER_METRIC_TYPE": "https/total_latencies",                    
+                "GCP_RESOURCE_ID_KEY": "id",
+                "GCP_RESOURCE_NAME_KEY": "gcp_name",                    
+                "GCP_RESOURCE_SELF_LINK_KEY": "selfLink"
+            },            
+            "apiParam": [  // passed into tech_spec ParserAPILib                
+                {
+                    "filter": {
+                        "metric.type": "$FILTER_METRIC_TYPE_PREFIX" + "$FILTER_METRIC_TYPE",
+                        "resource.labels.forwarding_rule_name": "$"   // processed by tech_spec - will NOT need actually
+                    },
+                    // interval is "5 days ago to 3 days ago"
+                    "interval.startTime": "$START_TIME",   // processed by C#, will NOT support a fixed time-window, e.g. Last Mon. -> Last Wed.
+                    "interval.endTime": "$END_TIME"
+                }
+            ],
+            "api": "NBGCPParserAPILib.getGCPMetrics"   // call tech_spec ParserAPILib
+        } 
+    }
+}

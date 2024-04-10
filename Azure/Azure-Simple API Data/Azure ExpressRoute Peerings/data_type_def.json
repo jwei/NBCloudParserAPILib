@@ -1,0 +1,31 @@
+// Azure API Doc: https://learn.microsoft.com/en-us/rest/api/expressroute/express-route-circuit-peerings/get?view=rest-expressroute-2023-09-01&tabs=HTTP
+
+{
+    "_id": "GUID",
+    "key": "azure_msee_peerings",
+    "displayName": "Azure ExpressRoute Curcuit Peerings",  // UI
+    "description": "Get all peerings' info of the MSEE's ExpressRoute.",
+    "apiDataCategoryId": "37a21905-2c29-4b8e-a520-2fab107ee5db",
+    "documentId": "6bcf2f20-9d59-4fef-b4d3-cb3b6014ed67",
+    "isBuiltin": true,
+    "apiDef": {
+        "parserInputVar": [],
+        "buildParameters": [{
+            "GetDeviceProperties": true,
+            "GetInterfaceProperties": false,
+            "techName": "Microsoft Azure",
+            "params": "*"
+        }],
+        "retrieveData": {            
+            "api": "NBAzureParserAPILib.GetExpressRouteCircuitPeerings",
+            "apiParams": [
+                {
+                    "metricnames": "$METRIC_NAME"
+                }
+            ],
+            "paramValue" : {                
+                "METRIC_NAME": "ApplicationRuleHit"
+            }
+        }
+    }
+}

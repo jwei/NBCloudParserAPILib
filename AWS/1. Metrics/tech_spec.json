@@ -1,0 +1,66 @@
+
+
+{
+    "name": "GCP LB Latency",    
+    "apiParserScriptCategoryId": "37a21905-2c29-4b8e-a520-2fab107ee5db",
+    "markdownFileId": "6bcf2f20-9d59-4fef-b4d3-cb3b6014ed67",
+    "apiDef": {
+        "parserInputVar": [
+        ],
+        "buildParameters": [{
+            "GetDeviceProperties": true,
+            "GetInterfaceProperties": false,
+            "techName": "Amazon AWS",
+            "params": "*"
+        }],
+        "retrieveData": {
+            "api": "GetAWSMetrics",   // call tech_spec ParserAPILib
+
+            "apiParams": [  // passed into tech_spec ParserAPILib
+                {
+                    "StartTime": "$START_TIME",
+                    "EndTime": "$END_TIME",
+                    "MaxDatapoints": "$MAX_DATA_POINTS",
+                    "MetricDataQueries":[
+                        {
+                            "Id": "$ID",
+                            "MetricStat": {
+                                "Period": "$PERIOD",
+                                "Stat": "$STAT",
+                                "Metric": {
+                                    "Namespace":"$NAME_SPACE",
+                                    "MetricName":"$METRIC_NAME",
+                                    "Dimensions":[
+                                        {
+                                            "Name": "$NAME",
+                                            "Value": "$" // processed by python script - will NOT need actually
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+
+            "apiParamsValue" : {  // processed by C#
+                "START_TIME" : {
+                    "unit": "hours", // min/hour/day
+                    "value": 200  // compared with datetime.now()
+                },
+                "END_TIME": {
+                    "unit": "day", // min/hour/day
+                    "value": 3  // compared with datetime.now()
+                },
+                "MAX_DATA_POINTS": 20,
+                "ID" : "a0",
+                "PERIOD": 300,
+                "STAT": "Sum",
+                "NAME_SPACE": "AWS/ApplicationELB",
+                "METRIC_NAME": "RequestCount",
+                "NAME":"LoadBalancer",
+            }, 
+
+        } 
+    }
+}

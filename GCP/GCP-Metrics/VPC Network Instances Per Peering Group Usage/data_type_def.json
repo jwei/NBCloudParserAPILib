@@ -1,0 +1,50 @@
+// tech_spec.json
+// GCP Metric - LB Total Letency
+
+// Solution 1 - special key for time:
+
+{
+    "name": "Google VPC Network Instances Per Peering Group Usage",    
+    "apiParserScriptCategoryId": "37a21905-2c29-4b8e-a520-2fab107ee5db",
+    "markdownFileId": "6bcf2f20-9d59-4fef-b4d3-cb3b6014ed67",
+    "apiDef": {
+        "parserInputVar": [
+            // { "name": "$intf_name" },
+            // { "name": "$start_time" },  // support a fixed time-window, e.g. Last Mon. -> Last Wed.
+            // { "name": "$end_time" }
+        ],
+        "buildParameters": [{
+            "GetDeviceProperties": true,
+            "GetInterfaceProperties": false,
+            "techName": "Google Cloud Platform",
+            "params": "*"
+        }],
+        "retrieveData": {
+            "extraParam" : {  // processed by C#
+                "START_TIME" : {
+                    "unit": "hours", // min/hour/day
+                    "value": 24  // compared with datetime.now()
+                }
+            },            
+            "apiParam": [  // passed into tech_spec ParserAPILib
+                {
+                    "FILTER_METRIC_TYPE_PREFIX": "compute.googleapis.com/",            
+                    "FILTER_METRIC_TYPE": "quota/instances_per_peering_group/usage",
+                    "GCP_RESOURCE_ID_KEY": "networkId",
+                    "GCP_RESOURCE_NAME_KEY": "gcp_name",                    
+                    "GCP_RESOURCE_SELF_LINK_KEY": "selfLink"
+                }, 
+                {
+                    "filter": {
+                        "metric.type": "loadbalancing.googleapis.com/https/total_latencies",                        
+                        "resource.labels.network_id": "$"   // processed by tech_spec - will NOT need actually
+                    },
+                    // interval is "5 days ago to 3 days ago"
+                    "interval.startTime": "$START_TIME",   // processed by C#, will NOT support a fixed time-window, e.g. Last Mon. -> Last Wed.
+                    "interval.endTime": "$END_TIME"
+                }
+            ],
+            "api": "getGCPMetrics"   // call tech_spec ParserAPILib
+        } 
+    }
+}

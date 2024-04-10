@@ -1,0 +1,32 @@
+// Azure API Doc: https://learn.microsoft.com/en-us/rest/api/virtualnetwork/virtual-network-peerings/get?view=rest-virtualnetwork-2023-09-01&tabs=HTTP
+
+{
+    "_id": "Azure.Subscription.children.ResourceGroup.children.VirtualNetwork.children.VirtualNetworkDistributedRouter",
+    // xxx,
+    "apiScripts": [
+        {
+            "_id": "GUID",
+            "key": "azure_vnet",
+            "displayName": "Azure Virtual Network",  // UI
+            "description": "Get details of the Virtual Network.",
+            "apiDataCategoryId": "37a21905-2c29-4b8e-a520-2fab107ee5db",
+            "documentId": "6bcf2f20-9d59-4fef-b4d3-cb3b6014ed67",
+            "isBuiltin": true,
+            "apiDef": {
+                "parserInputVar": [],
+                "buildParameters": [{
+                    "GetDeviceProperties": true,
+                    "GetInterfaceProperties": false,
+                    "techName": "Microsoft Azure",
+                    "params": "*"
+                }],
+                "retrieveData": {            
+                    "api": "NBAzureParserAPILib.GetResourceData",
+                    "apiParams": [],
+                    "apiParamsValue" : {}
+                }
+            }
+        }        
+    ]
+}
+

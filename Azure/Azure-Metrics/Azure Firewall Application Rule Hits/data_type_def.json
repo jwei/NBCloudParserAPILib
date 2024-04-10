@@ -1,0 +1,32 @@
+// Metrics Doc: https://learn.microsoft.com/en-us/azure/azure-monitor/reference/supported-metrics/microsoft-network-azurefirewalls-metrics
+// Azure API Doc: https://learn.microsoft.com/en-us/rest/api/monitor/metrics/list?view=rest-monitor-2023-10-01&tabs=HTTP
+
+{
+    "_id": "GUID",
+    "key": "azure_fw_rule_hits",
+    "displayName": "Azure Firewall Rule Hits",  // UI
+    "description": "Get the total number of times Application rules were hit of an Azure Firewall",
+    "apiDataCategoryId": "37a21905-2c29-4b8e-a520-2fab107ee5db",
+    "documentId": "6bcf2f20-9d59-4fef-b4d3-cb3b6014ed67",
+    "isBuiltin": true,
+    "apiDef": {
+        "parserInputVar": [],
+        "buildParameters": [{
+            "GetDeviceProperties": true,
+            "GetInterfaceProperties": false,
+            "techName": "Microsoft Azure",
+            "params": "*"
+        }],
+        "retrieveData": {            
+            "api": "NBAzureParserAPILib.GetMetrics",
+            "apiParams": [
+                {
+                    "metricnames": "$METRIC_NAME"
+                }
+            ],
+            "paramValue" : {                
+                "METRIC_NAME": "ApplicationRuleHit"
+            }
+        }
+    }
+}

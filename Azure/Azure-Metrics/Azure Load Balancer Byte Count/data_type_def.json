@@ -1,0 +1,51 @@
+// Metrics Doc: https://learn.microsoft.com/en-us/azure/azure-monitor/reference/supported-metrics/microsoft-network-loadbalancers-metrics
+// Azure API Doc: https://learn.microsoft.com/en-us/rest/api/monitor/metrics/list?view=rest-monitor-2023-10-01&tabs=HTTP
+
+{
+    "_id": "GUID",  // required if the JSON is stored in a single Collection
+    "key": "azure_lb_byte_cnt",  // unique globally
+    "displayName": "Azure Load Balancer Byte Count",  // UI
+    "description": "Get the total number of Bytes transmitted within the specific time period of Azure Load Balancer.",  // UI
+    "apiDataCategoryId": "37a21905-2c29-4b8e-a520-2fab107ee5db",  // categories of Cloud Data, e.g. Metrics, Simple API, Aggregated Data
+    "documentId": "6bcf2f20-9d59-4fef-b4d3-cb3b6014ed67",  // Markdown File ID (stored in DB collection)
+    "isBuiltin": true,
+    "apiDef": {
+
+        "parserInputVar": [   // input variable of the parser, used to generate the parser script comment section
+            // { "name": "$intf_name" },
+            // { "name": "$start_time" },  // support a fixed time-window, e.g. Last Mon. -> Last Wed.
+            // { "name": "$end_time" }
+        ],
+
+        "buildParameters": [{
+            "GetDeviceProperties": true,
+            "GetInterfaceProperties": false,
+            "techName": "Microsoft Azure",  // always the same for ONE cloud
+            "params": "*"  // Cloud should always use * to get all fields of the data model
+        }],
+
+        "retrieveData": {
+            
+            "api": "NBAzureParserAPILib.GetMetrics",   // defined in Cloud Parser API Lib
+
+            "apiParams": [  // API params required by Cloud Vendor's API -- described in Cloud Vendor's API Doc
+                {
+                    "metricnames": "$METRIC_NAME",
+                    "timespan": "$START_TIME/$END_TIME"                    
+                }
+            ],
+
+            "paramValue" : {  // referenced in apiParams
+                "START_TIME" : {
+                    "unit": "hours",  // min/hour/day
+                    "value": 4  // compared with datetime.now()
+                },
+                "END_TIME": {
+                    // "unit": "day", // min/hour/day
+                    // "value": 3  // compared with datetime.now()
+                },
+                "METRIC_NAME": "ByteCount"
+            }
+        }
+    }
+}

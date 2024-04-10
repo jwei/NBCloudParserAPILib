@@ -1,0 +1,3 @@
+It leverage Azure Resource Management API to retrieve all vpn connections for a particular virtual wan vpn gateway.
+ 
+For a complete description of response content and data structure, please reference to Azure Resource Management API Document: [https://learn.microsoft.com/en-us/rest/api/virtualwan/vpn-connections/list-by-vpn-gateway?view=rest-virtualwan-2023-09-01&tabs=HTTP](https://learn.microsoft.com/en-us/rest/api/virtualwan/vpn-connections/list-by-vpn-gateway?view=rest-virtualwan-2023-09-01&tabs=HTTP)

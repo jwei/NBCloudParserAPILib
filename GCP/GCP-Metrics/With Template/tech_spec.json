@@ -1,0 +1,49 @@
+// tech_spec.json
+// GCP Metric - LB Total Letency
+
+// Solution 1 - special key for time:
+
+{
+    "name": "GCP LB Latency",    
+    "apiParserScriptCategoryId": "37a21905-2c29-4b8e-a520-2fab107ee5db",
+    "markdownFileId": "6bcf2f20-9d59-4fef-b4d3-cb3b6014ed67",
+    "apiDef": {
+        "parserInputVar": [
+            { "name": "$intf_name" },
+
+            { "name": "$start_time" },  // support a fixed time-window, e.g. Last Mon. -> Last Wed.
+            { "name": "$end_time" }
+        ],
+        "buildParameters": [{
+            "GetDeviceProperties": true, // only need to get device data model
+            "GetInterfaceProperties": false, // also need to get interface data model
+            "techName": "Google Cloud",
+            "params": ["*"]
+        }],
+        "retrieveData": {
+            "extraParam" : {  // processed by C#
+                "START_TIME" : {
+                    "unit": "day", // min/hour/day
+                    "value": 5  // compared with datetime.now()
+                },
+                "END_TIME": {
+                    "unit": "day", // min/hour/day
+                    "value": 3  // compared with datetime.now()
+                }
+            },            
+            "apiParam": [  // passed into tech_spec ParserAPILib
+                {"metrics": "loadbalancing.googleapis.com/https/total_latencies"}, 
+                {
+                    "filter": {
+                        "metric.type": "loadbalancing.googleapis.com/https/total_latencies",                        
+                        "resource.labels.forwarding_rule_name": "$"   // processed by tech_spec - will NOT need actually
+                    },
+                    // interval is "5 days ago to 3 days ago"
+                    "interval.startTime": "$START_TIME",   // processed by C#, will NOT support a fixed time-window, e.g. Last Mon. -> Last Wed.
+                    "interval.endTime": "$END_TIME"
+                }
+            ],
+            "api": "getGCPMetrics"   // call tech_spec ParserAPILib
+        } 
+    }
+}

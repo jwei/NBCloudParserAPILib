@@ -1,0 +1,51 @@
+// tech_spec.json
+// GCP Metric - LB Total Letency
+
+// Solution 1 - special key for time:
+
+{
+    "name": "AWS LB Latency",    
+    "apiParserScriptCategoryId": "37a21905-2c29-4b8e-a520-2fab107ee5db",
+    "markdownFileId": "6bcf2f20-9d59-4fef-b4d3-cb3b6014ed67",
+    "apiDef": {
+        "parserInputVar": [
+        ],
+        "buildParameters": [{
+            "GetDeviceProperties": true,
+            "GetInterfaceProperties": false,
+            "techName": "AWS",
+            "params": "*"
+        }],
+        "retrieveData": {
+            "api": "getAWSSingleAPIdata",   // call tech_spec ParserAPILib
+          
+            "apiParams": [  // passed into tech_spec ParserAPILib
+                {
+                    "func_name": "$FUNC_NAME",   // processed by C#, will NOT support a fixed time-window, e.g. Last Mon. -> Last Wed.
+                    "filter_keys": "$FILTER_KEYS",
+
+
+
+                    // "customized_func_mapping": "$CUSTOMIZED_FUNC_MAPPING"
+                }
+            ],
+
+            "apiParamsValue" : {  // processed by C#
+                "FUNC_NAME" : "describe_transit_gateway_route_tables",
+                "FILTER_KEYS": ["transit-gateway-id"],
+
+
+                // "CUSTOMIZED_FUNC_MAPPING": {
+                //     "describe_transit_gateway_route_tables":
+                //     {
+                //         "resource_type": "ec2",
+                //         "response_field_name": "TransitGatewayRouteTables",
+                //         "transit-gateway-route-table-id": "Options.AssociationDefaultRouteTableId",
+                //         "transit-gateway-id": "TransitGatewayId"
+                //     }
+                // },
+            }
+
+        } 
+    }
+}
