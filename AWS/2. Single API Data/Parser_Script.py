@@ -12,7 +12,8 @@ For sample
     {"name": "$param2"}
 ]
 '''
-
+import json
+import datetime
 
 def BuildParameters(context, device_name, params):
     response = GetDeviceProperties(
@@ -28,23 +29,15 @@ def BuildParameters(context, device_name, params):
 
 
 def RetrieveData(params):
-    FUNC_NAME = "describe_transit_gateway_route_tables",
-    FILTER_KEYS = ["transit-gateway-id"],
-    CUSTOMIZED_FUNC_MAPPING = {
-        # "describe_transit_gateway_route_tables":
-        # {
-        #     "resource_type": "ec2",
-        #     "response_field_name": "TransitGatewayRouteTables",
-        #     "transit-gateway-route-table-id": "Options.AssociationDefaultRouteTableId",
-        #     "transit-gateway-id": "TransitGatewayId"
-        # }
-    },
+    FUNC_NAME = "describe_transit_gateway_route_tables"
+    FILTER_KEYS = ["transit-gateway-id"]
+    CUSTOMIZED_FUNC_MAPPING = {}
     result = ParserAPIlib.getAWSSingleAPIdata(
         retrieve_data_params=params,
         api_param={
                     "func_name": FUNC_NAME,
                     "filter_keys": FILTER_KEYS,
-                    #"customized_func_mapping": CUSTOMIZED_FUNC_MAPPING
+                    "customized_func_mapping": CUSTOMIZED_FUNC_MAPPING
                   }  
     )
 

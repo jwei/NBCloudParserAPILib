@@ -12,7 +12,8 @@ For sample
     {"name": "$param2"}
 ]
 '''
-
+import json
+import datetime
 
 def BuildParameters(context, device_name, params):
     response = GetDeviceProperties(

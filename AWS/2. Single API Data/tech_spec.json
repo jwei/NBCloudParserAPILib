@@ -23,29 +23,14 @@
                 {
                     "func_name": "$FUNC_NAME",   // processed by C#, will NOT support a fixed time-window, e.g. Last Mon. -> Last Wed.
                     "filter_keys": "$FILTER_KEYS",
-
-
-
-                    // "customized_func_mapping": "$CUSTOMIZED_FUNC_MAPPING"
+                    "customized_func_mapping": "$CUSTOMIZED_FUNC_MAPPING"
                 }
             ],
 
             "apiParamsValue" : {  // processed by C#
                 "FUNC_NAME" : "describe_transit_gateway_route_tables",
-                "FILTER_KEYS": ["transit-gateway-id"],
-
-
-                // "CUSTOMIZED_FUNC_MAPPING": {
-                //     "describe_transit_gateway_route_tables":
-                //     {
-                //         "resource_type": "ec2",
-                //         "response_field_name": "TransitGatewayRouteTables",
-                //         "transit-gateway-route-table-id": "Options.AssociationDefaultRouteTableId",
-                //         "transit-gateway-id": "TransitGatewayId"
-                //     }
-                // },
+                "FILTER_KEYS": ["transit-gateway-id"]
             }
-
-        } 
+        }
     }
 }

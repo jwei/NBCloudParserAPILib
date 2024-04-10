@@ -13,7 +13,6 @@ For sample
     {"name": "$param2"}
 ]
 '''
-
 import json
 import datetime
 
@@ -28,16 +27,19 @@ def BuildParameters(context, device_name, params):
     return response
 
 def RetrieveData(params):
-    FUNC_NAME = "describe_transit_gateway_route_tables",
-    KEY1 = "connectionId",
-    KEY2 = "virtualInterfaceId"
+    FUNC_NAME = "describe_virtual_interfaces"
+    FILTER_KEYS = []
+    CUSTOMIZED_FUNC_MAPPING = {}
 
-    result = ParserAPIlib.getAWSSingleAPIdata(
+    DATA_TYPE = "virtual_interface"
+
+    result = ParserAPIlib.getAWSAggregatedAPIdata(
         retrieve_data_params=params,
         api_param={
                     "func_name": FUNC_NAME,
-                    KEY1: '$VALUE1',
-                    KEY1: '$VALUE2'
+                    "filter_keys": FILTER_KEYS,
+                    "customized_func_mapping": CUSTOMIZED_FUNC_MAPPING
+                    "dataType": DATA_TYPE
                   }
     )
 

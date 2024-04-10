@@ -13,7 +13,7 @@
         "buildParameters": [{
             "GetDeviceProperties": true,
             "GetInterfaceProperties": false,
-            "techName": "Google Cloud Platform",
+            "techName": "AWS",
             "params": "*"
         }],
         "retrieveData": {
@@ -39,8 +39,7 @@
                         "transit-gateway-id": "TransitGatewayId"
                     }
                 },
-            },   
-
+            },
         } 
     }
 }
