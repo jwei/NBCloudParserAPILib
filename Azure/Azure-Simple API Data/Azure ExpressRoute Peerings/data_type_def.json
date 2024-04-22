@@ -16,13 +16,12 @@
             "techName": "Microsoft Azure",
             "params": "*"
         }],
-        "retrieveData": {            
+        "retrieveData": {
             "api": "NBAzureParserAPILib.GetExpressRouteCircuitPeerings",
-            "apiParams": [
+            "apiParams":
                 {
                     "metricnames": "$METRIC_NAME"
-                }
-            ],
+                },
             "paramValue" : {                
                 "METRIC_NAME": "ApplicationRuleHit"
             }

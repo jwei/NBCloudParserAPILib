@@ -38,6 +38,9 @@ class AWSParserAPILib:
         if nb_node['schema'] == "AWS.xxxxxxxxxxxxxxxxxxxx.xxxx.xxx.awsruter.children.VirtualInterface":
             if api_param["dataType"] == "virtual_interface":
                 return self.get_virtual_interface(nb_node)
+        if schema
+            dataype
+             get
 
     def get_virtual_interface(self, nb_vif)
         vif_id = NBAWSAPILibrary.GetResourceIDFromDataModel(nb_vif)

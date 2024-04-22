@@ -5,16 +5,16 @@
     "apiDef": {
         "parserInputVar": [
         ],
-        "buildParameters": [{
+        "buildParameters": {
             "GetDeviceProperties": true,
             "GetInterfaceProperties": false,
             "techName": "Amazon AWS",
             "params": "*"
-        }],
+        },
         "retrieveData": {
             "api": "GetAWSMetrics",   // call tech_spec ParserAPILib
 
-            "apiParams": [  // passed into tech_spec ParserAPILib
+            "apiParams":  // passed into tech_spec ParserAPILib
                 {
                     "StartTime": "$START_TIME",
                     "EndTime": "$END_TIME",
@@ -38,8 +38,7 @@
                             }
                         }
                     ]
-                }
-            ],
+                },
 
             "apiParamsValue" : {  // processed by C#
                 "START_TIME" : {

@@ -19,11 +19,10 @@
         }],
         "retrieveData": {            
             "api": "NBAzureParserAPILib.GetMetrics",
-            "apiParams": [
+            "apiParams": 
                 {
                     "metricnames": "$METRIC_NAME"
-                }
-            ],
+                },
             "paramValue" : {                
                 "METRIC_NAME": "ApplicationRuleHit"
             }

@@ -22,11 +22,9 @@
                 }],
                 "retrieveData": {            
                     "api": "NBAzureParserAPILib.GetResourceData",
-                    "apiParams": [
-                        {
-                            "dataType": "$DATA_TYPE"
-                        }
-                    ],
+                    "apiParams": {
+                        "dataType": "$DATA_TYPE"
+                    },
                     "apiParamsValue" : {
                         "DATA_TYPE": "vnet_peerings"
                     }

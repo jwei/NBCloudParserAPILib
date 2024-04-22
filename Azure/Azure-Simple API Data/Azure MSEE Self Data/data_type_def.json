@@ -18,12 +18,11 @@
         }],
         "retrieveData": {            
             "api": "NBAzureParserAPILib.GetExpressRouteCircuitPeerings",
-            "apiParams": [
+            "apiParams": 
                 {
                     "metricnames": "$METRIC_NAME"
-                }
-            ],
-            "paramValue" : {                
+                },
+            "apiParamsValue" : {                
                 "METRIC_NAME": "ApplicationRuleHit"
             }
         }

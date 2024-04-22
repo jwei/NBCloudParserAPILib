@@ -22,7 +22,7 @@
                 }],
                 "retrieveData": {            
                     "api": "NBAzureParserAPILib.GetResourceData",
-                    "apiParams": [],
+                    "apiParams": {},
                     "apiParamsValue" : {}
                 }
             }

@@ -12,25 +12,22 @@
         "parserInputVar": [
             { "name": "$intf_name" },
         ],
-        "buildParameters": [{
+        "buildParameters": {
             "GetDeviceProperties": true,
             "GetInterfaceProperties": true,
             "techName": "AWS",
             "params": "*"
-        }],
+        },
         "retrieveData": {
             "api": "getAWSAggregatedAPIdata",   // call tech_spec ParserAPILib
 
-            "apiParams": [  // passed into tech_spec ParserAPILib
+            "apiParams":  // passed into tech_spec ParserAPILib
                 {
                     "func_name": "$FUNC_NAME",   // processed by C#, will NOT support a fixed time-window, e.g. Last Mon. -> Last Wed.
                     "filter_keys": "$FILTER_KEYS",
-                    "customized_func_mapping": "$CUSTOMIZED_FUNC_MAPPING"
-                },
-                {
+                    "customized_func_mapping": "$CUSTOMIZED_FUNC_MAPPING",
                     "dataType": "$DATA_TYPE"
-                }
-            ],
+                },
             "apiParamsValue" : {  // processed by C#
                 "FUNC_NAME" : "describe_virtual_interfaces",
                 "DATA_TYPE": "virtual_interface"
